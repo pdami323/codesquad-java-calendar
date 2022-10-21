@@ -48,7 +48,8 @@ public class Calendar {
 	}
 
 	public static void main(String[] args) {
-
+		
+		String PROMPT = "cal> ";
 		// 숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
 //		System.out.println("달을 입력하세요.");
 //		Scanner scanner = new Scanner(System.in);
@@ -60,11 +61,13 @@ public class Calendar {
 		
 		//n번 반복
 		System.out.println("반복횟수를 입력하세요.");
+		System.out.print(PROMPT);
 		Scanner scanner = new Scanner(System.in);
 		int n = scanner.nextInt();
 		System.out.println("월을 입력하세요.");
 		int[] month = new int[n];
 		for(int i=0;i<n;i++) {
+			System.out.print(PROMPT);
 			month[i] = scanner.nextInt();
 		}
 		Calendar cal = new Calendar();
