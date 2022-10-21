@@ -6,14 +6,22 @@ public class Calendar_prac01 {
 	private final static String PROMPT = "cal> ";
 
 	public int getMaxDays(int year, int month) {
-		if (month % 2 == 0 && month != 2 && month != 8) {
-			return 30;
-		} else if (month == 2) {
-			if(year %4 ==0&&year %100 !=0) {
+		switch(month) {
+		case 2 :
+			if(year %4 ==0&& year % 100 !=0) {
 				return 29;
+			}else {
+				return 28;
 			}
-			return 28;
-		} else {
+		case 4 :
+			return 30;
+		case 6 :
+			return 30;
+		case 9:
+			return 30;
+		case 11:
+			return 30;
+		default : 
 			return 31;
 		}
 	}
