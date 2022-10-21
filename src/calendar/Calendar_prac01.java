@@ -5,10 +5,13 @@ import java.util.Scanner;
 public class Calendar_prac01 {
 	private final static String PROMPT = "cal> ";
 
-	public int getMaxDays(int month) {
+	public int getMaxDays(int year, int month) {
 		if (month % 2 == 0 && month != 2 && month != 8) {
 			return 30;
 		} else if (month == 2) {
+			if(year %4 ==0&&year %100 !=0) {
+				return 29;
+			}
 			return 28;
 		} else {
 			return 31;
@@ -31,8 +34,15 @@ public class Calendar_prac01 {
 		Scanner scanner = new Scanner(System.in);
 		Calendar_prac01 cal = new Calendar_prac01();
 		while (true) {
+			System.out.println("년도을 입력하세요.");
+			System.out.print("YEAR> ");
+			int year = scanner.nextInt();
+			if(year == -1) {
+				System.out.println("실행을 종료합니다.");
+				break;
+			}
 			System.out.println("월을 입력하세요.");
-			System.out.print(PROMPT);
+			System.out.print("MONTH> ");
 			int month = scanner.nextInt();
 			if (month == -1) {
 				System.out.println("실행을 종료합니다.");
@@ -42,7 +52,8 @@ public class Calendar_prac01 {
 				System.out.println("잘못 입력하셨습니다.");
 				continue;
 			}
-			int max_days = cal.getMaxDays(month);
+			int max_days = cal.getMaxDays(year, month);
+			System.out.printf("   << %d년 %d월 >>   \n", year, month);
 			cal.printMonth(max_days);
 		}
 		scanner.close();
