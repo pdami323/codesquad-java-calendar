@@ -1,12 +1,42 @@
 package calendar;
+
 import java.util.Scanner;
 
 public class Calendar {
-	private final int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	
+	//배열
+	private final int[] MAX_DAYS = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
 	public int getmaxDaysOfMonth(int month) {
-		return MAX_DAYS[month-1];
+		// if문
+		int[] day = new int[12];
+		for (int i = 1; i <= 12; i++) {
+			if (i % 2 == 0 && i != 8 && i != 2) {
+				day[i - 1] = 30;
+			} else if (i == 2) {
+				day[i - 1] = 28;
+			} else {
+				day[i - 1] = 31;
+			}
+		}
+		// switch문
+		switch (month) {
+		case 2:
+			return 28;
+		case 4:
+			return 30;
+		case 6:
+			return 30;
+		case 10:
+			return 30;
+		case 12:
+			return 30;
+		default:
+			return 31;
+		}
+//		return day[month-1];
+//		return MAX_DAYS[month-1];
 	}
+
 	public void printSampleCalendar() {
 		System.out.println("Hello, Calendar");
 		System.out.println(" 일  월  화  수 목  금  토");
@@ -17,18 +47,9 @@ public class Calendar {
 		System.out.println("22 23 24 25 26 27 28");
 	}
 
-	public static void main(String[] args) {		
-		//숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
-		int[] day = new int[12];
-		for(int i=1;i<=12;i++) {
-			if(i%2 == 0&&i!= 8&&i!=2) {
-				day[i-1] = 30;
-			}else if(i==2) {
-				day[i-1] = 28;
-			}else {
-				day[i-1] = 31;
-			}
-		}
+	public static void main(String[] args) {
+
+		// 숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
 		System.out.println("달을 입력하세요.");
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
@@ -36,7 +57,7 @@ public class Calendar {
 		int month = scanner.nextInt();
 //		System.out.printf("%d월은 %d일까지 있습니다.\n", month, day[month-1]);
 		System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getmaxDaysOfMonth(month));
-		
+
 		scanner.close();
 	}
 
