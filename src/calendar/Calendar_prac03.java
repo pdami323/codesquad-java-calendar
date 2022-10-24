@@ -1,7 +1,13 @@
 package calendar;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Calendar_prac03 {
 	/*
@@ -9,11 +15,24 @@ public class Calendar_prac03 {
 	 * plan
 	 */
 	private HashMap <Date, String> planMap;
+	private static final String SAVE_FILE = "calendar.dat";
 	public void registerPlan(String strDate, String plan) throws ParseException {
-		planMap = new HashMap<Date, String>();
+		
 		Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDate);
 		System.out.println(date);
 		planMap.put(date, plan);
+		File f = new File(SAVE_FILE);
+		String item = "";
+		item += strDate;
+		item += ",\"" + plan + "\"\n";
+		try {
+			FileWriter fw = new FileWriter(f, true);	//string을 바로 쓸 수 있다. (true는 append모드)
+			fw.write(item);						
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("일정이 등록되었습니다.");
 	}
 	public void searchPlan(String strDate) throws ParseException {
@@ -56,7 +75,7 @@ public class Calendar_prac03 {
 		count += standardWeekday;
 		return count%7;
 	}
-	public void printCalendar(int year, int month) {
+	public void printCalendar(int year, int month) throws ParseException {
 		Calendar_prac01 cal1 = new Calendar_prac01();
 		Calendar_prac03 cal = new Calendar_prac03();
 		int max_day = cal1.getMaxDays(year, month);
@@ -77,32 +96,55 @@ public class Calendar_prac03 {
 		System.out.println("\n");
 		
 	}
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		
-		while(true) {
-			System.out.println("년도를 입력하세요.");
-			System.out.println("YEAR> ");
-			int year = scanner.nextInt();
-			if(year == -1) {
-				System.out.println("실행을 종료합니다.");
-				break;
-			}
-			System.out.println("월을 입력하세요.");
-			System.out.println("MONTH> ");
-			int month = scanner.nextInt();
-			if(month == -1) {
-				System.out.println("실행을 종료합니다.");
-				break;
-			}
-			if(month < 1 || month > 12) {
-				System.out.println("잘못 입력했습니다.");
-				continue;
-			}
-			Calendar_prac03 cal = new Calendar_prac03();
-			cal.printCalendar(year, month);
+	public Calendar_prac03() throws ParseException {
+		planMap = new HashMap<Date, String>();
+		File f = new File(SAVE_FILE);
+		if(!f.exists()) {
+			System.err.println("no save file");
+			return;
 		}
-		scanner.close();
-		
+		try {
+			Scanner s = new Scanner(f);
+			while(s.hasNext()) {
+				String line = s.nextLine();
+				String[] words = line.split(",");
+				String strdate = words[0];
+				String plan = words[1].replaceAll("\"", "");
+				Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strdate);
+				planMap.put(date, plan);
+			}
+			s.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+//	public static void main(String[] args) {
+//		Scanner scanner = new Scanner(System.in);
+//		
+//		while(true) {
+//			System.out.println("년도를 입력하세요.");
+//			System.out.println("YEAR> ");
+//			int year = scanner.nextInt();
+//			if(year == -1) {
+//				System.out.println("실행을 종료합니다.");
+//				break;
+//			}
+//			System.out.println("월을 입력하세요.");
+//			System.out.println("MONTH> ");
+//			int month = scanner.nextInt();
+//			if(month == -1) {
+//				System.out.println("실행을 종료합니다.");
+//				break;
+//			}
+//			if(month < 1 || month > 12) {
+//				System.out.println("잘못 입력했습니다.");
+//				continue;
+//			}
+//			Calendar_prac03 cal = new Calendar_prac03();
+//			cal.printCalendar(year, month);
+//		}
+//		scanner.close();
+//		
+//	}
 }

@@ -12,6 +12,7 @@ public class Calendar_prac04 {
 		System.out.println("+---------------+");
 		Scanner scanner = new Scanner(System.in);
 		Calendar_prac03 cal = new Calendar_prac03();
+		
 		while(true) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			System.out.print("> ");
@@ -39,6 +40,7 @@ public class Calendar_prac04 {
 		String date = scanner.next();
 		scanner.nextLine();
 		System.out.println("일정을 입력하세요.");
+		System.out.print("> ");
 		String plan = scanner.nextLine();
 		cal.registerPlan(date, plan);
 		
@@ -49,7 +51,7 @@ public class Calendar_prac04 {
 		String date = scanner.next();
 		cal.searchPlan(date);
 	}
-	public void cmdCalendar(Scanner scanner) {
+	public void cmdCalendar(Scanner scanner) throws ParseException {
 		int year = 2022;
 		int month = 10;
 		System.out.println("[달력 보기] 년도를 입력하세요.");
