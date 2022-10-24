@@ -39,7 +39,7 @@ public class Calendar {
 
 	public void printSampleCalendar() {
 		System.out.println("Hello, Calendar");
-		System.out.println(" 일  월  화  수 목  금  토");
+		System.out.println(" 일 월 화 수 목 금 토");
 		System.out.println("--------------------");
 		System.out.println(" 1  2  3  4  5  6  7");
 		System.out.println(" 8  9 10 11 12 13 14");
@@ -50,6 +50,8 @@ public class Calendar {
 	public static void main(String[] args) {
 		
 		String PROMPT = "cal> ";
+		Calendar cal = new Calendar();
+		cal.printSampleCalendar();
 		// 숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
 //		System.out.println("달을 입력하세요.");
 //		Scanner scanner = new Scanner(System.in);
@@ -78,24 +80,24 @@ public class Calendar {
 //		System.out.println("실행을 마칩니다.\n");
 		
 		//무한반복
-		int month = 1;
-		Scanner scanner = new Scanner(System.in);
-		Calendar cal = new Calendar();
-		while(true) {
-			System.out.println("달을 입력하세요.");
-			System.out.print(PROMPT);
-			month = scanner.nextInt();
-			if(month == -1) {
-				System.out.println("실행종료");
-				break;
-			}
-			if(month <1 || month >12) {
-				System.out.println("입력이 올바르지 않습니다.");
-				continue;
-			}
-			System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getmaxDaysOfMonth(month));
-		}
-		scanner.close();
+//		int month = 1;
+//		Scanner scanner = new Scanner(System.in);
+//		Calendar cal = new Calendar();
+//		while(true) {
+//			System.out.println("달을 입력하세요.");
+//			System.out.print(PROMPT);
+//			month = scanner.nextInt();
+//			if(month == -1) {
+//				System.out.println("실행종료");
+//				break;
+//			}
+//			if(month <1 || month >12) {
+//				System.out.println("입력이 올바르지 않습니다.");
+//				continue;
+//			}
+//			System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getmaxDaysOfMonth(month));
+//		}
+		//scanner.close();
 	}
 
 }

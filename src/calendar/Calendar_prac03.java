@@ -1,7 +1,27 @@
 package calendar;
-import java.util.Scanner;
+import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Calendar_prac03 {
+	/*
+	 * date ex : "2018-04-14"
+	 * plan
+	 */
+	private HashMap <Date, String> planMap;
+	public void registerPlan(String strDate, String plan) throws ParseException {
+		planMap = new HashMap<Date, String>();
+		Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDate);
+		System.out.println(date);
+		planMap.put(date, plan);
+		System.out.println("일정이 등록되었습니다.");
+	}
+	public void searchPlan(String strDate) throws ParseException {
+		Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDate);
+		String plan = planMap.get(date);
+		System.out.println("1개의 일정이 있습니다.");
+		System.out.println(plan);
+	}
 	public int getWeekday(int year, int month) {
 		Calendar_prac01 cal1 = new Calendar_prac01();
 		

@@ -8,7 +8,7 @@ public class Calendar_prac01 {
 	public int getMaxDays(int year, int month) {
 		switch(month) {
 		case 2 :
-			if(year %4 ==0&& year % 100 !=0) {
+			if(year %4 ==0&& (year % 100 !=0 ||year % 400 == 0)) {
 				return 29;
 			}else {
 				return 28;
